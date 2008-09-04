@@ -1,0 +1,57 @@
+started
+Updating https://maven-incremental-build.dev.java.net/svn/maven-incremental-build/trunk
+At revision 48
+no change for https://maven-incremental-build.dev.java.net/svn/maven-incremental-build/trunk since the previous build
+Parsing POMs
+Reusing existing maven process
+Executing Maven:  -B -B -f /home/vincent/dev/hudson/hudson/plugins/dependency-analyzer/./work/jobs/maven-incremental-build/workspace/incremental-build/pom.xml install
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Incremental-build-plugin Maven Mojo
+[INFO]    task-segment: [install]
+[INFO] ------------------------------------------------------------------------
+[INFO] [plugin:descriptor]
+[INFO] Using 2 extractors.
+[INFO] Applying extractor for language: java
+[INFO] Extractor for language: java found 1 mojo descriptors.
+[INFO] Applying extractor for language: bsh
+[INFO] Extractor for language: bsh found 0 mojo descriptors.
+[INFO] [resources:resources]
+[INFO] Using default encoding to copy filtered resources.
+[INFO] [compiler:compile]
+[INFO] Nothing to compile - all classes are up to date
+[INFO] [resources:testResources]
+[INFO] Using default encoding to copy filtered resources.
+[INFO] [compiler:testCompile]
+[INFO] Nothing to compile - all classes are up to date
+[INFO] [surefire:test]
+[INFO] Surefire report directory: /home/vincent/dev/hudson/hudson/plugins/dependency-analyzer/work/jobs/maven-incremental-build/workspace/incremental-build/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running BaseTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.052 sec
+
+Results :
+
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+
+[HUDSON] Recording test results
+[INFO] [jar:jar]
+[INFO] Building jar: /home/vincent/dev/hudson/hudson/plugins/dependency-analyzer/work/jobs/maven-incremental-build/workspace/incremental-build/target/incremental-build-plugin-1.0-SNAPSHOT.jar
+[INFO] [plugin:addPluginArtifactMetadata]
+[INFO] [install:install]
+[INFO] Installing /home/vincent/dev/hudson/hudson/plugins/dependency-analyzer/work/jobs/maven-incremental-build/workspace/incremental-build/target/incremental-build-plugin-1.0-SNAPSHOT.jar to /home/vincent/.m2/repository/org/jvnet/maven/incrementalbuild/incremental-build-plugin/1.0-SNAPSHOT/incremental-build-plugin-1.0-SNAPSHOT.jar
+[INFO] [plugin:updateRegistry]
+[HUDSON] Archiving /home/vincent/dev/hudson/hudson/plugins/dependency-analyzer/./work/jobs/maven-incremental-build/workspace/incremental-build/pom.xml to /home/vincent/dev/hudson/hudson/plugins/dependency-analyzer/./work/jobs/maven-incremental-build/modules/org.jvnet.maven.incrementalbuild$incremental-build-plugin/builds/2008-08-27_23-28-31/archive/org.jvnet.maven.incrementalbuild/incremental-build-plugin/1.0-SNAPSHOT/pom.xml
+[HUDSON] Archiving /home/vincent/dev/hudson/hudson/plugins/dependency-analyzer/work/jobs/maven-incremental-build/workspace/incremental-build/target/incremental-build-plugin-1.0-SNAPSHOT.jar to /home/vincent/dev/hudson/hudson/plugins/dependency-analyzer/./work/jobs/maven-incremental-build/modules/org.jvnet.maven.incrementalbuild$incremental-build-plugin/builds/2008-08-27_23-28-31/archive/org.jvnet.maven.incrementalbuild/incremental-build-plugin/1.0-SNAPSHOT/incremental-build-plugin-1.0-SNAPSHOT.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESSFUL
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 23 seconds
+[INFO] Finished at: Wed Aug 27 23:28:55 CEST 2008
+[INFO] Final Memory: 16M/83M
+[INFO] ------------------------------------------------------------------------
+channel stopped
+finished: SUCCESS
