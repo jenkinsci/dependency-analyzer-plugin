@@ -21,7 +21,7 @@ public class BuildLogFileParserTest {
 	}
 	
 	@Test
-	public void testGetDependencyAnalyseSectionOneModuleNotPresent() throws Exception {
+	public void testGetDependencyAnalyseSectionNotPresent() throws Exception {
 		File file = getFile("log_build_without_dependency_analyse");
 		
 		parser.parseLogFile(file);
@@ -31,7 +31,7 @@ public class BuildLogFileParserTest {
 	}
 
 	@Test
-	public void testGetDependencyAnalyseSectionOneModulePresent() throws Exception {
+	public void testGetDependencyAnalyseSectionPresent() throws Exception {
 		File file = getFile("log_build_with_dependency_analyse");
 		
 		parser.parseLogFile(file);
@@ -43,8 +43,6 @@ public class BuildLogFileParserTest {
 
 		List lines = IOUtils.readLines(new StringReader(result));
 		Assert.assertEquals("Wrong number of line returned, ", 6, lines.size());
-		
-		
 		
 	}
 
