@@ -23,7 +23,6 @@ public class AbstractParserTestUtils {
 	 * @throws Exception
 	 */
 	protected File getFile(String fileName) throws Exception {
-		System.out.println("searching for file " + fileName);
 		Enumeration<URL> fileURL = this.getClass().getClassLoader()
 				.getResources(fileName);
 
