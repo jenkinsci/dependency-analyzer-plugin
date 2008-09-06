@@ -8,6 +8,7 @@
 	</parent>
 	<groupId>org.jvnet.hudson.plugins</groupId>
 	<artifactId>dependency-analyzer</artifactId>
+	<name>Hudson Dependency Analyzer Plugin</name>
 	<packaging>hpi</packaging>
 	<version>1.0-SNAPSHOT</version>
 	<build>
