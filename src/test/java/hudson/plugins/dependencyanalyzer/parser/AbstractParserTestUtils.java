@@ -12,7 +12,7 @@ import java.util.Enumeration;
  * @author Vincent Sellier
  * 
  */
-public class AbstractParserTest {
+public class AbstractParserTestUtils {
 
 	/**
 	 * return a file searching in the classpath

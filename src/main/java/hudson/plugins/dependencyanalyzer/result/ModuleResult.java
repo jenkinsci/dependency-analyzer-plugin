@@ -1,48 +1,41 @@
 package hudson.plugins.dependencyanalyzer.result;
 
+import hudson.maven.ModuleName;
+
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 public class ModuleResult implements Serializable {
 	private static final long serialVersionUID = -6461651211214230477L;
 
-	String artifactId;
-	String moduleName;
-	List<String> undeclaredDependencies = new ArrayList<String>();
-	List<String> unusedDependencies = new ArrayList<String>();
+	String displayName;
+	ModuleName moduleName;
+	
+	Map<DependencyProblemType, List<String>> dependencyProblems;
 
-	public String getArtifactId() {
-		return artifactId;
+	public String getDisplayName() {
+		return displayName;
 	}
 
-	public void setArtifactId(String artifactId) {
-		this.artifactId = artifactId;
+	public void setDisplayName(String displayName) {
+		this.displayName = displayName;
 	}
 
-	public String getModuleName() {
+	public ModuleName getModuleName() {
 		return moduleName;
 	}
 
-	public void setModuleName(String moduleName) {
+	public void setModuleName(ModuleName moduleName) {
 		this.moduleName = moduleName;
 	}
 
-	public List<String> getUndeclaredDependencies() {
-		return Collections.unmodifiableList(undeclaredDependencies);
+	public Map<DependencyProblemType, List<String>> getDependencyProblems() {
+		return dependencyProblems;
 	}
 
-	public void addUndeclaredDependencies(String undeclaredDependency) {
-		undeclaredDependencies.add(undeclaredDependency);
+	public void setDependencyProblems(
+			Map<DependencyProblemType, List<String>> dependencyProblems) {
+		this.dependencyProblems = dependencyProblems;
 	}
-
-	public List<String> getUnusedDependencies() {
-		return Collections.unmodifiableList(unusedDependencies);
-	}
-
-	public void addUnusedDependencies(String unusedDependency) {
-		unusedDependencies.add(unusedDependency);
-	}
-
 }

@@ -1,6 +1,7 @@
 package hudson.plugins.dependencyanalyzer.parser;
 
-import hudson.plugins.dependencyanalyzer.parser.DependencyAnalysisParser.DependencyProblemTypes;
+import hudson.plugins.dependencyanalyzer.parser.DependencyAnalysisParser.DependencyProblemTypesDetection;
+import hudson.plugins.dependencyanalyzer.result.DependencyProblemType;
 
 import java.io.File;
 import java.io.FileReader;
@@ -12,7 +13,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class DependencyAnalysisParserTest extends AbstractParserTest {
+public class DependencyAnalysisParserTest extends AbstractParserTestUtils {
 	private final static String UNUSED_DEPENDENCY_1 = "org.apache.maven:maven-artifact-manager:jar:2.0:compile";
 	private final static String UNUSED_DEPENDENCY_2 = "org.apache.maven:maven-artifact:jar:2.0:compile";
 	private final static String UNDECLARED_DEPENDENCY_1 = "org.apache.maven:maven-model:jar:2.0.2:compile";
@@ -34,14 +35,14 @@ public class DependencyAnalysisParserTest extends AbstractParserTest {
 
 		String content = IOUtils.toString(reader);
 
-		Map<DependencyProblemTypes, List<String>> result = parser
+		Map<DependencyProblemType, List<String>> result = parser
 				.parseDependencyAnalyzeSection(content);
 
 		Assert.assertEquals(
 				"Must have unsused declared and used undeclared dependencies",
 				2, result.size());
 
-		List<String> list = result.get(DependencyProblemTypes.UNUSED);
+		List<String> list = result.get(DependencyProblemType.UNUSED);
 		Assert.assertEquals("Must have 2 unused declared dependencies", 2,
 				list.size());
 		Assert.assertTrue(
@@ -51,7 +52,7 @@ public class DependencyAnalysisParserTest extends AbstractParserTest {
 				"Unused declared dependencies must contains " + UNUSED_DEPENDENCY_2,
 				list.contains(UNUSED_DEPENDENCY_2));
 		
-		list = result.get(DependencyProblemTypes.UNDECLARED);
+		list = result.get(DependencyProblemType.UNDECLARED);
 		Assert.assertEquals("Must have 2 undeclared used dependencies", 2,
 				list.size());
 		Assert.assertTrue(

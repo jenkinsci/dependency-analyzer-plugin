@@ -1,5 +1,7 @@
 package hudson.plugins.dependencyanalyzer.parser;
 
+import hudson.plugins.dependencyanalyzer.result.DependencyProblemType;
+
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -19,36 +21,43 @@ import org.apache.commons.lang.StringUtils;
  */
 public class DependencyAnalysisParser {
 
-	public static enum DependencyProblemTypes {
-		UNUSED(".*Unused declared.*"), UNDECLARED(".*Used undeclared.*");
+	public static enum DependencyProblemTypesDetection {
+		UNUSED(DependencyProblemType.UNUSED, ".*Unused declared.*"), 
+		UNDECLARED(DependencyProblemType.UNDECLARED, ".*Used undeclared.*");
 
 		private Pattern pattern;
+		private DependencyProblemType problemType;
 
-		private DependencyProblemTypes(String regex) {
+		private DependencyProblemTypesDetection(DependencyProblemType problemType, String regex) {
+			this.problemType = problemType;
 			pattern = Pattern.compile(regex);
 		}
 
-		public static DependencyProblemTypes matchAny(String line) {
-			for (DependencyProblemTypes problem : DependencyProblemTypes
+		private DependencyProblemType getProblemType() {
+			return problemType;
+		}
+		
+		public static DependencyProblemType matchAny(String line) {
+			for (DependencyProblemTypesDetection problem : DependencyProblemTypesDetection
 					.values()) {
 				if (problem.pattern.matcher(line).matches()) {
-					return problem;
+					return problem.getProblemType();
 				}
 			}
 			return null;
 		}
 	};
 
-	public Map<DependencyProblemTypes, List<String>> parseDependencyAnalyzeSection(
+	static public Map<DependencyProblemType, List<String>> parseDependencyAnalyzeSection(
 			String content) throws IOException {
-		Map<DependencyProblemTypes, List<String>> result = new HashMap<DependencyProblemTypes, List<String>>();
+		Map<DependencyProblemType, List<String>> result = new HashMap<DependencyProblemType, List<String>>();
 
 		List<String> lines = IOUtils.readLines(new StringReader(content));
 
-		DependencyProblemTypes currentProblemType = null;
+		DependencyProblemType currentProblemType = null;
 		for (String line : lines) {
 			if (!StringUtils.isBlank(line)) {
-				DependencyProblemTypes problemType = DependencyProblemTypes
+				DependencyProblemType problemType = DependencyProblemTypesDetection
 						.matchAny(line);
 				if (problemType != null) {
 					currentProblemType = problemType;
