@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * Parse the content of dependency:* sections and organize the detected
@@ -46,19 +47,22 @@ public class DependencyAnalysisParser {
 
 		DependencyProblemTypes currentProblemType = null;
 		for (String line : lines) {
-			DependencyProblemTypes problemType = DependencyProblemTypes
-					.matchAny(line);
-			if (problemType != null) {
-				currentProblemType = problemType;
-			} else {
-				if (currentProblemType != null) {
-					List<String> problems = result.get(currentProblemType);
-					if (problems == null) {
-						problems = new ArrayList<String>();
-						result.put(currentProblemType, problems);
+			if (!StringUtils.isBlank(line)) {
+				DependencyProblemTypes problemType = DependencyProblemTypes
+						.matchAny(line);
+				if (problemType != null) {
+					currentProblemType = problemType;
+				} else {
+					if (currentProblemType != null) {
+						List<String> problems = result.get(currentProblemType);
+						if (problems == null) {
+							problems = new ArrayList<String>();
+							result.put(currentProblemType, problems);
+						}
+						// removing log level
+						problems.add(line.substring(line.lastIndexOf(']') + 1)
+								.trim());
 					}
-					// removing log level
-					problems.add(line.substring(line.lastIndexOf(']')).trim());
 				}
 			}
 		}
