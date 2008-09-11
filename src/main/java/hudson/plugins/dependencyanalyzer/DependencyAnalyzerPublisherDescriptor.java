@@ -30,8 +30,6 @@ public class DependencyAnalyzerPublisherDescriptor extends
 		boolean applicable = AbstractMavenProject.class
 				.isAssignableFrom(jobType);
 
-		LOGGER.info("********* isApplicable (" + jobType + ") : " + applicable);
-
 		return applicable;
 	}
 

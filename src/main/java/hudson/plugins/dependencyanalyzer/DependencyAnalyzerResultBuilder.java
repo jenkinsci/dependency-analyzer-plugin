@@ -35,6 +35,7 @@ public class DependencyAnalyzerResultBuilder {
 			MavenModule mavenModule = moduleBuild.getProject();
 
 			ModuleResult moduleResult = buildModuleResult(mavenModule, logFile);
+			
 
 		}
 

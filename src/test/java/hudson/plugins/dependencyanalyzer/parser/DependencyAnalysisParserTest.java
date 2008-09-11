@@ -1,6 +1,5 @@
 package hudson.plugins.dependencyanalyzer.parser;
 
-import hudson.plugins.dependencyanalyzer.parser.DependencyAnalysisParser.DependencyProblemTypesDetection;
 import hudson.plugins.dependencyanalyzer.result.DependencyProblemType;
 
 import java.io.File;
@@ -19,13 +18,9 @@ public class DependencyAnalysisParserTest extends AbstractParserTestUtils {
 	private final static String UNDECLARED_DEPENDENCY_1 = "org.apache.maven:maven-model:jar:2.0.2:compile";
 	private final static String UNDECLARED_DEPENDENCY_2 = "org.codehaus.plexus:plexus-utils:jar:1.1:compile";
 	
-	
-	
-	DependencyAnalysisParser parser;
 
 	@Before
 	public void setUp() throws Exception {
-		parser = new DependencyAnalysisParser();
 	}
 
 	@Test
@@ -35,7 +30,7 @@ public class DependencyAnalysisParserTest extends AbstractParserTestUtils {
 
 		String content = IOUtils.toString(reader);
 
-		Map<DependencyProblemType, List<String>> result = parser
+		Map<DependencyProblemType, List<String>> result = DependencyAnalysisParser
 				.parseDependencyAnalyzeSection(content);
 
 		Assert.assertEquals(
