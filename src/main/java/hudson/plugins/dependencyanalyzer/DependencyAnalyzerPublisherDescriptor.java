@@ -35,31 +35,7 @@ public class DependencyAnalyzerPublisherDescriptor extends
 
 	@Override
 	public String getDisplayName() {
-		LOGGER.info("********* getDisplayName");
 		return Messages.dependencyanalyzer_name();
-	}
-
-	@Override
-	public String getConfigPage() {
-		LOGGER.info("******** getConfigPage : " + super.getConfigPage());
-
-		return super.getConfigPage();
-	}
-
-	@Override
-	public String getGlobalConfigPage() {
-		String page = super.getGlobalConfigPage();
-
-		LOGGER.info("******** global config page : " + page);
-
-		return page;
-	}
-
-	@Override
-	public String getHelpFile() {
-		LOGGER.info("******** getHelpFile : " + super.getHelpFile());
-
-		return super.getHelpFile();
 	}
 
 }
