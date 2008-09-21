@@ -14,8 +14,14 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
+
+import org.apache.commons.lang.StringUtils;
 
 public class DependencyAnalyzerResultBuilder {
+	public final static Logger LOGGER = Logger
+			.getLogger(DependencyAnalyzerResultBuilder.class.toString());
+
 	public static BuildResult buildResult(MavenModuleSetBuild build)
 			throws IOException {
 		BuildResult result = new BuildResult();
@@ -38,7 +44,7 @@ public class DependencyAnalyzerResultBuilder {
 
 			analysisResult.addResult(moduleResult);
 		}
-		
+
 		return result;
 	}
 
@@ -52,6 +58,11 @@ public class DependencyAnalyzerResultBuilder {
 		// extracting dependency section from log file
 		String dependencySection = logFileParser.getDependencyAnalyseBlock();
 
+		if (StringUtils.isBlank(dependencySection)) {
+			LOGGER.info("No dependency section found. Add dependency:analyze on your job configuration.");
+			return moduleResult;
+		}
+		
 		// extracting informations from dependency section
 		Map<DependencyProblemType, List<String>> dependencyProblems = DependencyAnalysisParser
 				.parseDependencyAnalyzeSection(dependencySection);
