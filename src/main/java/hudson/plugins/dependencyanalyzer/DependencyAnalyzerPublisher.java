@@ -17,7 +17,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.logging.Logger;
-import java.util.zip.ZipOutputStream;
+import java.util.zip.GZIPOutputStream;
 
 import org.kohsuke.stapler.DataBoundConstructor;
 
@@ -29,7 +29,7 @@ public class DependencyAnalyzerPublisher extends Publisher {
 	public static final Logger LOGGER = Logger
 			.getLogger(DependencyAnalyzerPublisher.class.getName());
 
-	private static final String RESULT_FILE_NAME = "dependencies-analysis.ser";
+	private static final String RESULT_FILE_NAME = "dependencies-analysis.ser.gz";
 	
 	public static final Descriptor<Publisher> DESCRIPTOR = new DependencyAnalyzerPublisherDescriptor();
 
@@ -65,7 +65,8 @@ public class DependencyAnalyzerPublisher extends Publisher {
 
 	private void persistResult(AbstractBuild<?, ?> build, BuildResult analysis) throws IOException {
 		File file = new File(build.getRootDir(), RESULT_FILE_NAME);
-		ObjectOutputStream out = new ObjectOutputStream(new ZipOutputStream(new FileOutputStream(file)));
+		
+		ObjectOutputStream out = new ObjectOutputStream(new GZIPOutputStream(new FileOutputStream(file)));
 		
 		out.writeObject(analysis);
 		out.flush();
