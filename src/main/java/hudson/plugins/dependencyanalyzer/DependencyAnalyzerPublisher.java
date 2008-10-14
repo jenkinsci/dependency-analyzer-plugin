@@ -60,7 +60,7 @@ public class DependencyAnalyzerPublisher extends Publisher {
 		// Persist the result in the current build
 		persistResult(build, analysis);
 		
-		build.getActions().add(new DependencyAnalyzerPublisherAction());
+		build.getActions().add(new DependencyAnalyzerPublisherAction(build));
 		
 		return super.perform(build, launcher, listener);
 	}
