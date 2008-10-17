@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,6 +20,9 @@ import org.apache.commons.io.IOUtils;
  * 
  */
 public class BuildLogFileParser {
+	public static final Logger LOGGER = Logger
+			.getLogger(BuildLogFileParser.class.getName());
+
 	private final static String LOG_LEVEL_REGEX = "^\\[[A-Z]*\\] ";
 	private final static Pattern GOAL_START = Pattern.compile(LOG_LEVEL_REGEX
 			+ "\\[.*:.*\\]$");
@@ -55,26 +60,35 @@ public class BuildLogFileParser {
 	private Map<Goal, String> goalsLog = new HashMap<Goal, String>();
 
 	public void parseLogFile(File logFile) throws IOException {
+		LOGGER.info("Parsing " + logFile.getAbsolutePath());
 		FileInputStream input = new FileInputStream(logFile);
 
 		List<String> lines = (List<String>) IOUtils.readLines(input);
 
-		for (int i = 0; i < lines.size();) {
-			String line = lines.get(i++);
+		Iterator<String> lineIterator = lines.iterator();
+		
+		while(lineIterator.hasNext()) {
+			String line = lineIterator.next();
 
 			Goal goal = Goal.getMatchingGoal(line);
 			if (goal != null) {
 				StringBuilder section = new StringBuilder();
 
 				// Pass the search section to only keep content of the section
-				line = lines.get(i++);
-
-				do {
-					section.append(line).append("\n");
-					line = lines.get(i++);
-				} while (!(GOAL_START.matcher(line).matches() || END_OF_BUILD
-								.matcher(line).matches()));
-
+				
+				while (lineIterator.hasNext() && !parsed) {
+					line = lineIterator.next(); 
+					
+					if( GOAL_START.matcher(line).matches()
+							|| END_OF_BUILD.matcher(line).matches()) {
+						parsed = true;
+					} else {
+						section.append(line).append("\n");
+						LOGGER.info(line);
+					}
+				
+				}
+				
 				goalsLog.put(goal, section.toString());
 			}
 		}

@@ -36,7 +36,7 @@ public class BuildLogFileParserTest extends AbstractParserTestUtils {
 		
 		parser.parseLogFile(file);
 		
-		Assert.assertNull("No dependency:analyse block must be found", parser.getDependencyAnalyseBlock());
+		Assert.assertNotNull("No dependency:analyse block found", parser.getDependencyAnalyseBlock());
 		
 	}
 

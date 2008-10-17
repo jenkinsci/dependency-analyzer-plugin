@@ -58,9 +58,9 @@ public class DependencyAnalyzerPublisher extends Publisher {
 				.buildResult((MavenModuleSetBuild) build);
 
 		// Persist the result in the current build
-		persistResult(build, analysis);
+		//persistResult(build, analysis);
 		
-		build.getActions().add(new DependencyAnalyzerPublisherAction(build));
+		build.getActions().add(new DependencyAnalyzerPublisherAction(build, analysis));
 		
 		return super.perform(build, launcher, listener);
 	}
