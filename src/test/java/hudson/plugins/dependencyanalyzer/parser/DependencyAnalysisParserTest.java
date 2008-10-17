@@ -25,7 +25,7 @@ public class DependencyAnalysisParserTest extends AbstractParserTestUtils {
 
 	@Test
 	public void testParseDependencyAnalyzeSection() throws Exception {
-		File file = getFile("dependency_analyse_section_1");
+		File file = getFile("dependency_analyze_section_1");
 		FileReader reader = new FileReader(file);
 
 		String content = IOUtils.toString(reader);

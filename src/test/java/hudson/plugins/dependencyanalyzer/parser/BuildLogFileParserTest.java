@@ -22,7 +22,7 @@ public class BuildLogFileParserTest extends AbstractParserTestUtils {
 	
 	@Test
 	public void testGetDependencyAnalyseSectionNotPresent() throws Exception {
-		File file = getFile("log_build_without_dependency_analyse");
+		File file = getFile("log_build_without_dependency_analyze");
 		
 		parser.parseLogFile(file);
 		
@@ -31,8 +31,19 @@ public class BuildLogFileParserTest extends AbstractParserTestUtils {
 	}
 
 	@Test
+	public void testGetDependencyAnalyseSectionEmpty() throws Exception {
+		File file = getFile("log_build_with_empty_dependency_analyze");
+		
+		parser.parseLogFile(file);
+		
+		Assert.assertNull("No dependency:analyse block must be found", parser.getDependencyAnalyseBlock());
+		
+	}
+
+	
+	@Test
 	public void testGetDependencyAnalyseSectionPresent() throws Exception {
-		File file = getFile("log_build_with_dependency_analyse");
+		File file = getFile("log_build_with_dependency_analyze");
 		
 		parser.parseLogFile(file);
 		
