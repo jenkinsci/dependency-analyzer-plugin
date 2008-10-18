@@ -24,8 +24,6 @@ public class DependencyAnalyzerResultBuilder {
 
 	public static BuildResult buildResult(MavenModuleSetBuild build)
 			throws IOException {
-		BuildResult result = new BuildResult();
-
 		Map<MavenModule, List<MavenBuild>> moduleBuilds = ((MavenModuleSetBuild) build)
 				.getModuleBuilds();
 
@@ -45,7 +43,7 @@ public class DependencyAnalyzerResultBuilder {
 			analysisResult.addResult(moduleResult);
 		}
 
-		return result;
+		return analysisResult;
 	}
 
 	private static ModuleResult buildModuleResult(MavenModule module,
@@ -59,10 +57,11 @@ public class DependencyAnalyzerResultBuilder {
 		String dependencySection = logFileParser.getDependencyAnalyseBlock();
 
 		if (StringUtils.isBlank(dependencySection)) {
-			LOGGER.info("No dependency section found. Add dependency:analyze on your job configuration.");
+			LOGGER
+					.info("No dependency section found. Add dependency:analyze on your job configuration.");
 			return moduleResult;
 		}
-		
+
 		// extracting informations from dependency section
 		Map<DependencyProblemType, List<String>> dependencyProblems = DependencyAnalysisParser
 				.parseDependencyAnalyzeSection(dependencySection);
@@ -71,7 +70,7 @@ public class DependencyAnalyzerResultBuilder {
 		moduleResult.setModuleName(module.getModuleName());
 		moduleResult.setDisplayName(module.getDisplayName());
 		moduleResult.setDependencyProblems(dependencyProblems);
-		
+
 		return moduleResult;
 	}
 }

@@ -7,6 +7,11 @@
               
       <l:main-panel>
 		<h1>${%Dependency Analysis Report}</h1>
+test
+		<j:forEach var="module" items="${it.buildResult.modules}">
+			Display : ${module.displayName}
+			Name : ${module.moduleName}
+		</j:forEach>
 
 	  </l:main-panel>
       
