@@ -6,6 +6,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 public class ModuleResult implements Serializable {
 	private static final long serialVersionUID = -6461651211214230477L;
 
@@ -37,5 +40,9 @@ public class ModuleResult implements Serializable {
 	public void setDependencyProblems(
 			Map<DependencyProblemType, List<String>> dependencyProblems) {
 		this.dependencyProblems = dependencyProblems;
+	}
+
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
 	}
 }
