@@ -16,13 +16,13 @@ import com.thoughtworks.xstream.XStream;
  *
  */
 public class BuildResultSerializer {
-	private static final String RESULT_FILE_NAME = "dependencies-analysis.xml";
+	public static final String RESULT_FILE_NAME = "dependencies-analysis.xml";
 	private static final XStream stream = new XStream2();
 	
 	/**
 	 * Serialize into an xml file the result into a given directory
 	 */
-	public static void serialize(String directory, BuildResult result) throws IOException {
+	public static void serialize(File directory, BuildResult result) throws IOException {
 		FileWriter writer = new FileWriter(getFile(directory));
 		
 		stream.toXML(result, writer);
@@ -35,7 +35,7 @@ public class BuildResultSerializer {
 	 * Deserialize the result for the passed directory
 	 * 
 	 */
-	public static BuildResult deserialize(String directory) throws IOException {
+	public static BuildResult deserialize(File directory) throws IOException {
 		FileReader reader = new FileReader(getFile(directory));
 		
 		BuildResult result = (BuildResult) stream.fromXML(reader);
@@ -43,7 +43,7 @@ public class BuildResultSerializer {
 		return result;
 	}
 	
-	private static File getFile(String directory) {
+	private static File getFile(File directory) {
 		File fileName = new File(directory, RESULT_FILE_NAME);
 		return fileName;
 	}

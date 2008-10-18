@@ -5,15 +5,12 @@ import hudson.plugins.dependencyanalyzer.result.BuildResult;
 import hudson.plugins.dependencyanalyzer.result.DependencyProblemType;
 import hudson.plugins.dependencyanalyzer.result.ModuleResult;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.ObjectUtils;
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -37,7 +34,7 @@ public class BuildResultSerializerTest {
 		
 		module.setDependencyProblems(problemsMap);
 		
-		String tmpDir = System.getProperty("java.io.tmpdir");
+		File tmpDir = new File(System.getProperty("java.io.tmpdir"));
 		System.out.println(tmpDir);
 		
 		BuildResultSerializer.serialize(tmpDir, result);
@@ -46,7 +43,10 @@ public class BuildResultSerializerTest {
 		System.out.println(result.toString());
 		System.out.println(result2.toString());
 		
-		Assert.assertEquals("Initial and serialize object are differents", result.toString(), result2.toString());  
+		Assert.assertEquals("Initial and serialize object are differents", result.toString(), result2.toString());
+		
+		File file = new File(tmpDir, BuildResultSerializer.RESULT_FILE_NAME);
+		file.delete();
 	}
 	
 }
