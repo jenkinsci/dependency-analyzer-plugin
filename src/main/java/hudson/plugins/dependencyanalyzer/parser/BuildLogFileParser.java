@@ -60,7 +60,7 @@ public class BuildLogFileParser {
 	private Map<Goal, String> goalsLog = new HashMap<Goal, String>();
 
 	public void parseLogFile(File logFile) throws IOException {
-		LOGGER.info("Parsing " + logFile.getAbsolutePath());
+		LOGGER.fine("Parsing " + logFile.getAbsolutePath());
 		FileInputStream input = new FileInputStream(logFile);
 
 		List<String> lines = (List<String>) IOUtils.readLines(input);
@@ -84,7 +84,6 @@ public class BuildLogFileParser {
 						parsed = true;
 					} else {
 						section.append(line).append("\n");
-						LOGGER.info(line);
 					}
 				
 				}
