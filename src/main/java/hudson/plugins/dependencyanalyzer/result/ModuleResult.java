@@ -37,6 +37,26 @@ public class ModuleResult implements Serializable {
 		return dependencyProblems;
 	}
 
+	public Integer getUnusedDependenciesCount() {
+		List<String> dependencies = getUnusedDependencies();
+		
+		return dependencies == null ? 0 : dependencies.size();
+	}
+	
+	public Integer getUndeclaredDependenciesCount() {
+		List<String> dependencies = getUndeclaredDependencies();
+		
+		return dependencies == null ? 0 : dependencies.size();
+	}
+	
+	public List<String> getUnusedDependencies() {
+		return dependencyProblems.get(DependencyProblemType.UNUSED);
+	}
+	
+	public List<String> getUndeclaredDependencies() {
+		return dependencyProblems.get(DependencyProblemType.UNDECLARED);
+	}
+	
 	public void setDependencyProblems(
 			Map<DependencyProblemType, List<String>> dependencyProblems) {
 		this.dependencyProblems = dependencyProblems;

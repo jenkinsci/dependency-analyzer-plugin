@@ -7,10 +7,50 @@
               
       <l:main-panel>
 		<h1>${%Dependency Analysis Report}</h1>
-test
+
 		<j:forEach var="module" items="${it.buildResult.modules}">
-			Display : ${module.displayName}
-			Name : ${module.moduleName}
+			<table>
+				<j:if test="${module.unusedDependenciesCount > 0 or module.undeclaredDependenciesCount > 0}">
+					<tr>
+						<td class="pane-header">${module.displayName} (${module.moduleName}) </td>
+					</tr>
+					
+					<j:if test="${module.unusedDependenciesCount > 0}">
+						<tr>
+							<td class="pane">
+								<table>
+									<tr>
+										<td class="pane-header">${%Unused dependencies}</td>
+									</tr>
+									<j:forEach var="dependency" items="${module.unusedDependencies}">
+										<tr>
+											<td class="pane">${dependency}</td>
+										</tr>
+									</j:forEach>
+								</table> 
+							</td>
+						</tr>
+					</j:if>
+
+					<j:if test="${module.undeclaredDependenciesCount > 0}">
+						<tr>
+							<td class="pane">
+								<table>
+									<tr>
+										<td class="pane-header">${%Undeclared used dependencies}</td>
+									</tr>
+									<j:forEach var="dependency" items="${module.undeclaredDependencies}">
+										<tr>
+											<td class="pane">${dependency}</td>
+										</tr>
+									</j:forEach>
+								</table> 
+							</td>
+						</tr>
+					</j:if>
+
+				</j:if>
+			</table>
 		</j:forEach>
 
 	  </l:main-panel>

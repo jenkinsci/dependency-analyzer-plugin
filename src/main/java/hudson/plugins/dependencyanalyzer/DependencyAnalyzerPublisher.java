@@ -44,7 +44,7 @@ public class DependencyAnalyzerPublisher extends Publisher {
 		Result result = build.getResult();
 		if (!Result.SUCCESS.equals(result)) {
 			LOGGER
-					.info("Build is not successfull, no dependencies analysis.");
+					.info("Build is not successful, no dependencies analysis.");
 			return false;
 		}
 
