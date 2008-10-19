@@ -1,6 +1,7 @@
 package hudson.plugins.dependencyanalyzer.parser;
 
 import java.io.File;
+import java.io.StringBufferInputStream;
 import java.io.StringReader;
 import java.net.URL;
 import java.util.Enumeration;
@@ -26,7 +27,7 @@ public class BuildLogFileParserTest extends AbstractParserTestUtils {
 		
 		parser.parseLogFile(file);
 		
-		Assert.assertNull("No dependency:analyse block must be found", parser.getDependencyAnalyseBlock());
+		Assert.assertNull("No dependency:analyze block must be found", parser.getDependencyAnalyseBlock());
 		
 	}
 
@@ -36,8 +37,7 @@ public class BuildLogFileParserTest extends AbstractParserTestUtils {
 		
 		parser.parseLogFile(file);
 		
-		Assert.assertNotNull("No dependency:analyse block found", parser.getDependencyAnalyseBlock());
-		
+		Assert.assertNotNull("No dependency:analyze block found", parser.getDependencyAnalyseBlock());
 	}
 
 	

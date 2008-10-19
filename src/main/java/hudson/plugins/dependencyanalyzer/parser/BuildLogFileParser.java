@@ -23,11 +23,14 @@ public class BuildLogFileParser {
 	public static final Logger LOGGER = Logger
 			.getLogger(BuildLogFileParser.class.getName());
 
-	private final static String LOG_LEVEL_REGEX = "^\\[[A-Z]*\\] ";
+	private final static String LOG_LEVEL_REGEX = "^\\[(INFO|WARNING)\\] ";
 	private final static Pattern GOAL_START = Pattern.compile(LOG_LEVEL_REGEX
 			+ "\\[.*:.*\\]$");
 	private final static Pattern END_OF_BUILD = Pattern.compile(LOG_LEVEL_REGEX
 			+ "[-]*$");
+	// To limit selection to maven output (filtering [HUDSON] tags)
+	private final static Pattern MAVEN_OUTPUT = Pattern.compile(LOG_LEVEL_REGEX
+			+ ".*");
 
 	private enum Goal {
 		DEPENDENCY_ANALYSE(LOG_LEVEL_REGEX + "\\[dependency:analyze\\]$");
@@ -66,8 +69,8 @@ public class BuildLogFileParser {
 		List<String> lines = (List<String>) IOUtils.readLines(input);
 
 		Iterator<String> lineIterator = lines.iterator();
-		
-		while(lineIterator.hasNext()) {
+
+		while (lineIterator.hasNext()) {
 			String line = lineIterator.next();
 
 			Goal goal = Goal.getMatchingGoal(line);
@@ -75,19 +78,21 @@ public class BuildLogFileParser {
 				StringBuilder section = new StringBuilder();
 
 				// Pass the search section to only keep content of the section
-				
+
 				while (lineIterator.hasNext() && !parsed) {
-					line = lineIterator.next(); 
-					
-					if( GOAL_START.matcher(line).matches()
+					line = lineIterator.next();
+
+					if (GOAL_START.matcher(line).matches()
 							|| END_OF_BUILD.matcher(line).matches()) {
 						parsed = true;
 					} else {
-						section.append(line).append("\n");
+						if (MAVEN_OUTPUT.matcher(line).matches()) {
+							section.append(line).append("\n");
+						}
 					}
-				
+
 				}
-				
+
 				goalsLog.put(goal, section.toString());
 			}
 		}

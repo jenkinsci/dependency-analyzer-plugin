@@ -38,6 +38,7 @@ WAGON_VERSION: 1.0-beta-2
 [WARNING] Unused declared dependencies found:
 [WARNING]    org.apache.maven:maven-artifact-manager:jar:2.0:compile
 [WARNING]    org.apache.maven:maven-artifact:jar:2.0:compile
+[HUDSON] Archiving pom.xml to build/pom.xml
 [INFO] [plugin:descriptor]
 [INFO] Using 2 extractors.
 [INFO] Applying extractor for language: java
