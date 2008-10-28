@@ -31,7 +31,7 @@ public class DependencyAnalyzerPublisherAction implements Action {
 	}
 
 	public String getIconFileName() {
-		return "/plugin/dependencyanalyser/dependencies.png";
+		return "/plugin/dependencyanalyzer/img/dependencies.png";
 	}
 
 	public String getUrlName() {
