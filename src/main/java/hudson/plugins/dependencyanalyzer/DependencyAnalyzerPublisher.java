@@ -42,9 +42,8 @@ public class DependencyAnalyzerPublisher extends Publisher {
 			BuildListener listener) throws InterruptedException, IOException {
 
 		Result result = build.getResult();
-		if (! (Result.SUCCESS.equals(result) || Result.UNSTABLE.equals(result))) {
-			LOGGER
-					.info("Build is not successful, no dependency analysis.");
+		if (!(Result.SUCCESS.equals(result) || Result.UNSTABLE.equals(result))) {
+			LOGGER.info("Build is not successful, no dependency analysis.");
 			return false;
 		}
 
@@ -54,11 +53,11 @@ public class DependencyAnalyzerPublisher extends Publisher {
 
 		// persist this analysis for this build
 		BuildResultSerializer.serialize(build.getRootDir(), analysis);
-		
-		build.getActions().add(new DependencyAnalyzerPublisherAction(build, analysis));
-		
+
+		build.getActions().add(
+				new DependencyAnalyzerPublisherAction(build, analysis));
+
 		return super.perform(build, launcher, listener);
 	}
 
-	
 }
