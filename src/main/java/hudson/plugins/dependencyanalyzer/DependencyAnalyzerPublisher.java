@@ -42,9 +42,9 @@ public class DependencyAnalyzerPublisher extends Publisher {
 			BuildListener listener) throws InterruptedException, IOException {
 
 		Result result = build.getResult();
-		if (!Result.SUCCESS.equals(result)) {
+		if (! (Result.SUCCESS.equals(result) || Result.UNSTABLE.equals(result))) {
 			LOGGER
-					.info("Build is not successful, no dependencies analysis.");
+					.info("Build is not successful, no dependency analysis.");
 			return false;
 		}
 
