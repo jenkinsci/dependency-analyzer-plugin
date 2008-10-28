@@ -31,11 +31,11 @@ public class DependencyAnalyzerPublisherAction implements Action {
 	}
 
 	public String getIconFileName() {
-		return "/plugin/dependencyanalyzer/img/dependencies.png";
+		return Const.ICON_URL;
 	}
 
 	public String getUrlName() {
-		return "dependencyanalyzer";
+		return Const.MODULE_URL;
 	}
 
 	public AbstractBuild<?, ?> getBuild() {
