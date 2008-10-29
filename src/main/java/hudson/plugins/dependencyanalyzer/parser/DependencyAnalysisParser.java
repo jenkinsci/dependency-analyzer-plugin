@@ -21,6 +21,8 @@ import org.apache.commons.lang.StringUtils;
  */
 public class DependencyAnalysisParser {
 
+	private final static Pattern ARTIFACT_PATTERN = Pattern.compile(".*:.*:.*:.*:.*");
+	
 	public static enum DependencyProblemTypesDetection {
 		UNUSED(DependencyProblemType.UNUSED, ".*Unused declared.*"), 
 		UNDECLARED(DependencyProblemType.UNDECLARED, ".*Used undeclared.*");
@@ -62,7 +64,7 @@ public class DependencyAnalysisParser {
 				if (problemType != null) {
 					currentProblemType = problemType;
 				} else {
-					if (currentProblemType != null) {
+					if (currentProblemType != null && ARTIFACT_PATTERN.matcher(line).matches()) {
 						List<String> problems = result.get(currentProblemType);
 						if (problems == null) {
 							problems = new ArrayList<String>();
