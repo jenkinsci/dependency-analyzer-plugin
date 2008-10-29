@@ -10,7 +10,7 @@
 	<artifactId>dependencyanalyzer</artifactId>
 	<name>Hudson Dependency Analyzer Plugin</name>
 	<packaging>hpi</packaging>
-	<version>1.0-SNAPSHOT</version>
+	<version>0.1-SNAPSHOT</version>
 	<build>
 		<!--
 			Since new versions need to overwrite old versions, it's better not to
