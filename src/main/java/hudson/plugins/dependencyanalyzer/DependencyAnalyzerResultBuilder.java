@@ -33,14 +33,18 @@ public class DependencyAnalyzerResultBuilder {
 
 		while (iterator.hasNext()) {
 			List<MavenBuild> builds = moduleBuilds.get(iterator.next());
-			MavenBuild moduleBuild = builds.get(0);
+			// Desactivated modules have no builds
+			if (builds.size() > 0) {
+				MavenBuild moduleBuild = builds.get(0);
 
-			File logFile = moduleBuild.getLogFile();
-			MavenModule mavenModule = moduleBuild.getProject();
+				File logFile = moduleBuild.getLogFile();
+				MavenModule mavenModule = moduleBuild.getProject();
 
-			ModuleResult moduleResult = buildModuleResult(mavenModule, logFile);
+				ModuleResult moduleResult = buildModuleResult(mavenModule,
+						logFile);
 
-			analysisResult.addResult(moduleResult);
+				analysisResult.addResult(moduleResult);
+			}
 		}
 
 		return analysisResult;
