@@ -11,7 +11,7 @@
 	<name>Hudson Dependency Analyzer Plugin</name>
 	<packaging>hpi</packaging>
 	<version>0.2-SNAPSHOT</version>
-	<url>http://hudson.gotdns.com/wiki/display/HUDSON/Dependency+Analyzer+Plugin</url>
+	<url>http://wiki.hudson-ci.org/display/HUDSON/Dependency+Analyzer+Plugin</url>
 	<build>
 		<!--
 			Since new versions need to overwrite old versions, it's better not to
