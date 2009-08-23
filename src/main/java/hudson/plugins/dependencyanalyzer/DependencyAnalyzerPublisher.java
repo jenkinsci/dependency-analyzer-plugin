@@ -38,7 +38,7 @@ public class DependencyAnalyzerPublisher extends Publisher {
 	}
 
 	@Override
-	public boolean perform(AbstractBuild<?, ?> build, Launcher launcher,
+	public boolean perform(AbstractBuild build, Launcher launcher,
 			BuildListener listener) throws InterruptedException, IOException {
 
 		Result result = build.getResult();
