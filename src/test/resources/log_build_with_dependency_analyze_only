@@ -1,0 +1,24 @@
+[INFO] Scanning for projects...
+[INFO] Searching repository for plugin with prefix: 'dependency'.
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Hudson Dependency Analyzer Plugin
+[INFO]    task-segment: [dependency:analyze-only]
+[INFO] ------------------------------------------------------------------------
+[INFO] [dependency:analyze-only]
+[WARNING] Used undeclared dependencies found:
+[WARNING]    commons-lang:commons-lang:jar:2.4:provided
+[WARNING]    org.kohsuke.stapler:stapler:jar:1.107:provided
+[WARNING]    commons-io:commons-io:jar:1.3.1:provided
+[WARNING]    org.jvnet.localizer:localizer:jar:1.9:provided
+[WARNING]    org.jvnet.hudson:xstream:jar:1.3.1-hudson-3:provided
+[WARNING] Unused declared dependencies found:
+[WARNING]    org.jvnet.hudson.main:hudson-war:war:1.318:test
+[WARNING]    org.jvnet.hudson.main:hudson-test-harness:jar:1.318:test
+[WARNING]    javax.servlet:servlet-api:jar:2.4:provided
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESSFUL
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 29 seconds
+[INFO] Finished at: Sat Aug 22 00:45:15 CEST 2009
+[INFO] Final Memory: 26M/85M
+[INFO] ------------------------------------------------------------------------

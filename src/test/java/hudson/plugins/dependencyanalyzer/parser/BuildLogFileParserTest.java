@@ -40,7 +40,6 @@ public class BuildLogFileParserTest extends AbstractParserTestUtils {
 		Assert.assertNotNull("No dependency:analyze block found", parser.getDependencyAnalyseBlock());
 	}
 
-	
 	@Test
 	public void testGetDependencyAnalyzeSectionPresent() throws Exception {
 		File file = getFile("log_build_with_dependency_analyze");
@@ -56,5 +55,20 @@ public class BuildLogFileParserTest extends AbstractParserTestUtils {
 		
 	}
 
+	@Test
+	public void testGetDependencyAnalyzeOnlySectionPresent() throws Exception {
+		File file = getFile("log_build_with_dependency_analyze_only");
+		
+		parser.parseLogFile(file);
+		
+		String result = parser.getDependencyAnalyseBlock();
+
+		Assert.assertNotNull("dependency:analyze-only block must be found", result);
+
+		List<String> lines = IOUtils.readLines(new StringReader(result));
+		Assert.assertEquals("Wrong number of line returned, ", 10, lines.size());
+		
+	}
+	
 	
 }
