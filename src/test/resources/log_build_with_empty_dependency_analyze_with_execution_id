@@ -1,0 +1,26 @@
+[INFO] Scanning for projects...
+[INFO] Searching repository for plugin with prefix: 'dependency'.
+[INFO] ------------------------------------------------------------------------
+[INFO] Building jmemcached Core
+[INFO]    task-segment: [dependency:analyze]
+[INFO] ------------------------------------------------------------------------
+[INFO] Preparing dependency:analyze
+[INFO] [resources:resources {execution: default-resources}]
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /Software/hudson/jobs/jmemcache-daemon/workspace/core/src/main/resources
+[INFO] [compiler:compile {execution: default-compile}]
+[INFO] Nothing to compile - all classes are up to date
+[INFO] [resources:testResources {execution: default-testResources}]
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /Software/hudson/jobs/jmemcache-daemon/workspace/core/src/test/resources
+[INFO] [compiler:testCompile {execution: default-testCompile}]
+[INFO] Nothing to compile - all classes are up to date
+[INFO] [dependency:analyze {execution: default-cli}]
+[INFO] No dependency problems found
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESSFUL
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 5 seconds
+[INFO] Finished at: Sat Aug 22 00:18:56 CEST 2009
+[INFO] Final Memory: 21M/80M
+[INFO] ------------------------------------------------------------------------

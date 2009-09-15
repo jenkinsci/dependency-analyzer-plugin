@@ -33,7 +33,7 @@ public class BuildLogFileParser {
 			+ ".*");
 
 	private enum Goal {
-		DEPENDENCY_ANALYSE(LOG_LEVEL_REGEX + "\\[dependency:analyze(-only)?\\]$");
+		DEPENDENCY_ANALYSE(LOG_LEVEL_REGEX + "\\[dependency:analyze(-only)?( \\{execution: [^\\}]+\\}){0,1}\\]$");
 
 		private Pattern pattern;
 
