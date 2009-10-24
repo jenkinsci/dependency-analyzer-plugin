@@ -7,11 +7,11 @@ import hudson.Launcher;
 import hudson.maven.MavenModuleSetBuild;
 import hudson.model.AbstractBuild;
 import hudson.model.BuildListener;
-import hudson.model.Descriptor;
 import hudson.model.Result;
 import hudson.plugins.dependencyanalyzer.persistence.BuildResultSerializer;
 import hudson.plugins.dependencyanalyzer.result.BuildResult;
-import hudson.tasks.Publisher;
+import hudson.tasks.BuildStepMonitor;
+import hudson.tasks.Recorder;
 
 import java.io.IOException;
 import java.util.logging.Logger;
@@ -22,19 +22,16 @@ import org.kohsuke.stapler.DataBoundConstructor;
  * @author Vincent Sellier
  * 
  */
-public class DependencyAnalyzerPublisher extends Publisher {
+public class DependencyAnalyzerPublisher extends Recorder {
 	public static final Logger LOGGER = Logger
 			.getLogger(DependencyAnalyzerPublisher.class.getName());
 
-	public static final Descriptor<Publisher> DESCRIPTOR = new DependencyAnalyzerPublisherDescriptor();
-
 	@DataBoundConstructor
 	public DependencyAnalyzerPublisher() {
-
 	}
 
-	public Descriptor<Publisher> getDescriptor() {
-		return DESCRIPTOR;
+	public BuildStepMonitor getRequiredMonitorService() {
+		return BuildStepMonitor.STEP;
 	}
 
 	@Override
@@ -57,7 +54,7 @@ public class DependencyAnalyzerPublisher extends Publisher {
 		build.getActions().add(
 				new DependencyAnalyzerPublisherAction(build, analysis));
 
-		return super.perform(build, launcher, listener);
+		return true;
 	}
 
 }

@@ -24,7 +24,7 @@ public class DependencyAnalyzerResultBuilder {
 
 	public static BuildResult buildResult(MavenModuleSetBuild build)
 			throws IOException {
-		Map<MavenModule, List<MavenBuild>> moduleBuilds = ((MavenModuleSetBuild) build)
+		Map<MavenModule, List<MavenBuild>> moduleBuilds = build
 				.getModuleBuilds();
 
 		Iterator<MavenModule> iterator = moduleBuilds.keySet().iterator();

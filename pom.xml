@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>org.jvnet.hudson.plugins</groupId>
 		<artifactId>plugin</artifactId>
-		<version>1.318</version>
+		<version>1.319</version>
 		<relativePath>..</relativePath>
 	</parent>
 	<groupId>org.jvnet.hudson.plugins</groupId>
@@ -12,24 +12,6 @@
 	<packaging>hpi</packaging>
 	<version>0.5-SNAPSHOT</version>
 	<url>http://wiki.hudson-ci.org/display/HUDSON/Dependency+Analyzer+Plugin</url>
-	<build>
-		<!--
-			Since new versions need to overwrite old versions, it's better not to
-			have version number in the .hpi file name.
-		-->
-		<finalName>${project.artifactId}</finalName>
-		<defaultGoal>package</defaultGoal>
-
-
-		<plugins>
-			<plugin>
-				<groupId>org.jvnet.hudson.tools</groupId>
-				<artifactId>maven-hpi-plugin</artifactId>
-				<version>1.20</version>
-				<extensions>true</extensions>
-			</plugin>
-		</plugins>
-	</build>
 
 	<dependencies>
 	   <dependency>
