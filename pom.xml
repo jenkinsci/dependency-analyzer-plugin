@@ -12,6 +12,12 @@
 	<packaging>hpi</packaging>
 	<version>0.5-SNAPSHOT</version>
 	<url>http://wiki.hudson-ci.org/display/HUDSON/Dependency+Analyzer+Plugin</url>
+	<developers>
+	   <developer>
+	      <id>vsellier</id>
+	      <name>Vincent Sellier</name>
+	   </developer>
+	</developers>
 
 	<dependencies>
 	   <dependency>
