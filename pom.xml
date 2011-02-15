@@ -3,15 +3,15 @@
 	<parent>
 		<groupId>org.jvnet.hudson.plugins</groupId>
 		<artifactId>plugin</artifactId>
-		<version>1.319</version>
+		<version>1.377</version>
 		<relativePath>..</relativePath>
 	</parent>
 	<groupId>org.jvnet.hudson.plugins</groupId>
 	<artifactId>dependencyanalyzer</artifactId>
-	<name>Hudson Dependency Analyzer Plugin</name>
+	<name>Jenkins Dependency Analyzer Plugin</name>
 	<packaging>hpi</packaging>
 	<version>0.6-SNAPSHOT</version>
-	<url>http://wiki.hudson-ci.org/display/HUDSON/Dependency+Analyzer+Plugin</url>
+	<url>http://wiki.jenkins-ci.org/display/JENKINS/Dependency+Analyzer+Plugin</url>
 	<developers>
 	   <developer>
 	      <id>vsellier</id>
@@ -29,8 +29,8 @@
 
 	<!-- artifactId doesn't match plugin directory -->
 	<scm>
-	  <connection>scm:svn:https://guest@svn.dev.java.net/svn/hudson/trunk/hudson/plugins/dependency-analyzer</connection>
-	  <developerConnection>scm:svn:https://svn.dev.java.net/svn/hudson/trunk/hudson/plugins/dependency-analyzer</developerConnection>
-	  <url>https://svn.dev.java.net/svn/hudson/trunk/hudson/plugins/dependency-analyzer</url>
+	  <connection>scm:svn:https://svn.jenkins-ci.org/trunk/hudson/plugins/dependency-analyzer</connection>
+	  <developerConnection>scm:svn:https://svn.jenkins-ci.org/trunk/hudson/plugins/dependency-analyzer</developerConnection>
+	  <url>https://svn.jenkins-ci.org/trunk/hudson/plugins/dependency-analyzer</url>
 	</scm>
 </project>
