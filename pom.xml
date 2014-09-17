@@ -10,12 +10,16 @@
 	<artifactId>dependencyanalyzer</artifactId>
 	<name>Jenkins Dependency Analyzer Plugin</name>
 	<packaging>hpi</packaging>
-	<version>0.7-SNAPSHOT</version>
+	<version>0.7</version>
 	<url>http://wiki.jenkins-ci.org/display/JENKINS/Dependency+Analyzer+Plugin</url>
 	<developers>
 	   <developer>
 	      <id>vsellier</id>
 	      <name>Vincent Sellier</name>
+	   </developer>
+	   <developer>
+	      <id>ejouvin</id>
+	      <name>Etienne Jouvin</name>
 	   </developer>
 	</developers>
 
@@ -47,6 +51,4 @@
             <url>http://repo.jenkins-ci.org/public/</url>
         </pluginRepository>
     </pluginRepositories>
-</project>  
-  
-
+</project>

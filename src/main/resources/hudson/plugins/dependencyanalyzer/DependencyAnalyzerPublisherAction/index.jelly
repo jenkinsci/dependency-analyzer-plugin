@@ -17,12 +17,23 @@
 					<j:if test="${module.unusedDependenciesCount > 0}">
 						<table class="pane">	
 							<tr>
-								<td class="pane-header">${%Unused dependencies}</td>
+								<td class="pane-header" colspan="5">${%Unused dependencies}</td>
 							</tr>
 						
+							<tr>
+								<th class="pane" width="20%">${%Dependency GroupId}</th>
+								<th class="pane" width="20%">${%Dependency Artifact}</th>
+								<th class="pane" width="20%">${%Dependency Type}</th>
+								<th class="pane" width="20%">${%Dependency Version}</th>
+								<th class="pane" width="20%">${%Dependency Scope}</th>
+							</tr>
 							<j:forEach var="dependency" items="${module.unusedDependencies}">
 								<tr class="pane">
-									<td class="pane">${dependency}</td>
+									<td class="pane" width="20%">${dependency.groupId}</td>
+									<td class="pane" width="20%">${dependency.artifact}</td>
+									<td class="pane" width="20%">${dependency.type}</td>
+									<td class="pane" width="20%">${dependency.version}</td>
+									<td class="pane" width="20%">${dependency.scope}</td>
 								</tr>
 							</j:forEach>
 						</table> 
@@ -31,12 +42,23 @@
 					<j:if test="${module.undeclaredDependenciesCount > 0}">
 						<table class="pane">
 							<tr>
-								<td class="pane-header">${%Undeclared used dependencies}</td>
+								<td class="pane-header" colspan="5">${%Undeclared used dependencies}</td>
 							</tr>
 						
+							<tr>
+								<th class="pane" width="20%">${%Dependency GroupId}</th>
+								<th class="pane" width="20%">${%Dependency Artifact}</th>
+								<th class="pane" width="20%">${%Dependency Type}</th>
+								<th class="pane" width="20%">${%Dependency Version}</th>
+								<th class="pane" width="20%">${%Dependency Scope}</th>
+							</tr>
 							<j:forEach var="dependency" items="${module.undeclaredDependencies}">
 								<tr>
-									<td class="pane">${dependency}</td>
+									<td class="pane" width="20%">${dependency.groupId}</td>
+									<td class="pane" width="20%">${dependency.artifact}</td>
+									<td class="pane" width="20%">${dependency.type}</td>
+									<td class="pane" width="20%">${dependency.version}</td>
+									<td class="pane" width="20%">${dependency.scope}</td>
 								</tr>
 							</j:forEach>
 						</table> 

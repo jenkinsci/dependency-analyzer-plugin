@@ -15,7 +15,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class BuildResultSerializerTest {
-	
+
 	@Test
 	public void testSerializeDeserialize() throws Exception {
 		BuildResult result = new BuildResult();
@@ -23,30 +23,27 @@ public class BuildResultSerializerTest {
 		result.addResult(module);
 		module.setDisplayName("name1");
 		module.setModuleName(new ModuleName("group1", "artifact1"));
-		
+
 		Map<DependencyProblemType, List<String>> problemsMap = new HashMap<DependencyProblemType, List<String>>();
-	
+
 		List<String> problems = new ArrayList<String>();
 		problems.add("pb1");
 		problems.add("pb2");
 		problemsMap.put(DependencyProblemType.UNDECLARED, problems);
 		problemsMap.put(DependencyProblemType.UNUSED, new ArrayList<String>(problems));
-		
+
 		module.setDependencyProblems(problemsMap);
-		
+
 		File tmpDir = new File(System.getProperty("java.io.tmpdir"));
-		System.out.println(tmpDir);
-		
-		BuildResultSerializer.serialize(tmpDir, result);
-		BuildResult result2 = BuildResultSerializer.deserialize(tmpDir);
-		
-		System.out.println(result.toString());
-		System.out.println(result2.toString());
-		
+
+		BuildResultSerializer serializer = BuildResultSerializer.getInstance();
+		serializer.serialize(tmpDir, result);
+		BuildResult result2 = serializer.deserialize(tmpDir);
+
 		Assert.assertEquals("Initial and serialize object are differents", result.toString(), result2.toString());
-		
-		File file = new File(tmpDir, BuildResultSerializer.RESULT_FILE_NAME);
+
+		File file = new File(tmpDir, "dependencies-analysis.xml");
 		file.delete();
 	}
-	
+
 }

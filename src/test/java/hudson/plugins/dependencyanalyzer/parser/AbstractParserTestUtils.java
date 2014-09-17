@@ -17,14 +17,12 @@ public class AbstractParserTestUtils {
 	/**
 	 * return a file searching in the classpath
 	 * 
-	 * @param fileName
-	 *            the name of the file relative to the classpath
+	 * @param fileName the name of the file relative to the classpath
 	 * @return the file
 	 * @throws Exception
 	 */
 	protected File getFile(String fileName) throws Exception {
-		Enumeration<URL> fileURL = this.getClass().getClassLoader()
-				.getResources(fileName);
+		Enumeration<URL> fileURL = this.getClass().getClassLoader().getResources(fileName);
 
 		String fullFileName = fileURL.nextElement().getFile();
 

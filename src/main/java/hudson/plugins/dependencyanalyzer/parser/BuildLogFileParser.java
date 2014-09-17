@@ -15,101 +15,137 @@ import org.apache.commons.io.IOUtils;
 
 /**
  * Cut the log file in sections for each maven goals.
- * 
+ *
  * @author Vincent Sellier
- * 
+ * @author Etienne Jouvin
  */
 public class BuildLogFileParser {
-	public static final Logger LOGGER = Logger
-			.getLogger(BuildLogFileParser.class.getName());
 
-	private final static String LOG_LEVEL_REGEX = "^\\[(INFO|WARNING)\\] ";
-	private final static Pattern GOAL_START = Pattern.compile(LOG_LEVEL_REGEX
-			+ "\\[.*:.*\\]$");
-	private final static Pattern END_OF_BUILD = Pattern.compile(LOG_LEVEL_REGEX
-			+ "[-]*$");
-	// To limit selection to maven output (filtering [HUDSON] tags)
-	private final static Pattern MAVEN_OUTPUT = Pattern.compile(LOG_LEVEL_REGEX
-			+ ".*");
-
+	/**
+	 * Internal enumeration to register a goal and the regular expression for the starting section of the goal.
+	 */
 	private enum Goal {
-		DEPENDENCY_ANALYSE(LOG_LEVEL_REGEX + "\\[dependency:analyze(-only)?( \\{execution: [^\\}]+\\}){0,1}\\]$");
+		DEPENDENCY_ANALYSE(A_LOG_LEVEL_REGEX + "\\[dependency:analyze(-only)?( \\{execution: [^\\}]+\\}){0,1}\\]$");
 
 		private Pattern pattern;
 
+		/**
+		 * @param regex Regular expression for the goal.
+		 */
 		private Goal(String regex) {
-			pattern = Pattern.compile(regex);
+			this.pattern = Pattern.compile(regex);
 		}
 
+		/**
+		 * @return the pattern.
+		 */
 		public Pattern getPattern() {
-			return pattern;
+			return this.pattern;
 		}
 
-		public static Goal getMatchingGoal(String line) {
-			Goal[] goals = Goal.values();
-
-			for (Goal goal : goals) {
-				Pattern pattern = goal.pattern;
-				Matcher matcher = pattern.matcher(line);
-				if (matcher.matches()) {
-					return goal;
-				}
-			}
-			return null;
-		}
 	}
 
-	private boolean parsed = false;
+	private static final String A_LOG_LEVEL_REGEX = "\\[(INFO|WARNING)\\] ";
+	private static final Pattern END_OF_BUILD = Pattern.compile(A_LOG_LEVEL_REGEX + "[-]*$");
+	private static final Pattern GOAL_START = Pattern.compile(A_LOG_LEVEL_REGEX + "\\[.*:.*\\]$");
+	private static final Logger LOGGER = Logger.getLogger(BuildLogFileParser.class.getName());
+
+	// To limit selection to maven output (filtering [HUDSON] tags)
+	private static final Pattern MAVEN_OUTPUT = Pattern.compile(A_LOG_LEVEL_REGEX + ".*");
+
 	private Map<Goal, String> goalsLog = new HashMap<Goal, String>();
 
+	private boolean parsed = false;
+
+	/**
+	 * Retrieve log content extracted for a goal.
+	 *
+	 * @param goal Source goal.
+	 * @return Goal content extracted from the log file.
+	 */
+	private String getContent(Goal goal) {
+		if (!this.parsed) {
+			throw new RuntimeException("No log file was parsed");
+		}
+
+		return this.goalsLog.get(goal);
+	}
+
+	/**
+	 * @return Content extracted from the log file for the goal dependency analyze.
+	 */
+	public String getDependencyAnalyseBlock() {
+		return this.getContent(Goal.DEPENDENCY_ANALYSE);
+	}
+
+	/**
+	 * Find a matching goal from a line, according the goal regular expression.
+	 *
+	 * @param line The line to control.
+	 * @return Found goal.
+	 */
+	private Goal getMatchingGoal(String line) {
+		Goal res = null;
+		Goal[] goals = Goal.values();
+
+		Pattern pattern;
+		Matcher matcher;
+		for (Goal goal : goals) {
+			pattern = goal.getPattern();
+			matcher = pattern.matcher(line);
+			if (matcher.find()) {
+				res = goal;
+				break;
+			}
+		}
+
+		return res;
+	}
+
+	/**
+	 * Parse log file to find dependency analyze informations.
+	 *
+	 * @param logFile Log file to parge.
+	 * @throws IOException File reading error.
+	 */
 	public void parseLogFile(File logFile) throws IOException {
 		LOGGER.fine("Parsing " + logFile.getAbsolutePath());
 		FileInputStream input = new FileInputStream(logFile);
 
-		List<String> lines = (List<String>) IOUtils.readLines(input);
+		List<String> lines = IOUtils.readLines(input);
 
 		Iterator<String> lineIterator = lines.iterator();
 
+		/* Init the parsed flag to false for this file. */
+		this.parsed = false;
 		while (lineIterator.hasNext()) {
 			String line = lineIterator.next();
 
-			Goal goal = Goal.getMatchingGoal(line);
+			Goal goal = this.getMatchingGoal(line);
 			if (goal != null) {
 				StringBuilder section = new StringBuilder();
 
 				// Pass the search section to only keep content of the section
-
-				while (lineIterator.hasNext() && !parsed) {
+				Matcher mavenMatcher;
+				while (lineIterator.hasNext() && !this.parsed) {
 					line = lineIterator.next();
 
-					if (GOAL_START.matcher(line).matches()
-							|| END_OF_BUILD.matcher(line).matches()) {
-						parsed = true;
+					if (GOAL_START.matcher(line).find() || END_OF_BUILD.matcher(line).find()) {
+						this.parsed = true;
 					} else {
-						if (MAVEN_OUTPUT.matcher(line).matches()) {
-							section.append(line).append("\n");
+						mavenMatcher = MAVEN_OUTPUT.matcher(line);
+						if (mavenMatcher.find()) {
+							section.append(mavenMatcher.group()).append("\n");
 						}
 					}
 
 				}
 
-				goalsLog.put(goal, section.toString());
+				this.goalsLog.put(goal, section.toString());
 			}
 		}
 
-		parsed = true;
-	}
-
-	private String getContent(Goal goal) {
-		if (!parsed) {
-			throw new RuntimeException("No log file was parsed");
-		}
-
-		return goalsLog.get(goal);
-	}
-
-	public String getDependencyAnalyseBlock() {
-		return getContent(Goal.DEPENDENCY_ANALYSE);
+		this.parsed = true;
 	}
 
 }
