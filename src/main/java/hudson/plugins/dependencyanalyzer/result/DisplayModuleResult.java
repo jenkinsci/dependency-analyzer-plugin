@@ -2,7 +2,6 @@ package hudson.plugins.dependencyanalyzer.result;
 
 import hudson.maven.ModuleName;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -10,24 +9,23 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
 /**
- * Dependency analyze result for a module.
+ * Dependency analyze result for a module. Class used for the display. Copy ModuleResult in order to backward
+ * compatibility. In previous version, artifact informations were displayed as a bloc. The new version split
+ * informations in array and the serializing may conflict.
  *
- * @author Vincent Sellier
  * @author Etienne Jouvin
  *
  */
-public class ModuleResult implements Serializable {
+public class DisplayModuleResult {
 
-	private static final long serialVersionUID = -6461651211214230477L;
-
-	private Map<DependencyProblemType, List<String>> dependencyProblems;
+	private Map<DependencyProblemType, List<Dependency>> dependencyProblems;
 	private String displayName;
 	private ModuleName moduleName;
 
 	/**
 	 * @return the dependencyProblems.
 	 */
-	public Map<DependencyProblemType, List<String>> getDependencyProblems() {
+	public Map<DependencyProblemType, List<Dependency>> getDependencyProblems() {
 		return this.dependencyProblems;
 	}
 
@@ -48,31 +46,31 @@ public class ModuleResult implements Serializable {
 	/**
 	 * @return Used dependencies, but not declared, list.
 	 */
-	public List<String> getUndeclaredDependencies() {
-		return this.dependencyProblems.get(DependencyProblemType.UNDECLARED);
+	public List<Dependency> getUndeclaredDependencies() {
+		return this.dependencyProblems == null ? null : this.dependencyProblems.get(DependencyProblemType.UNDECLARED);
 	}
 
 	/**
 	 * @return The number for used dependencies but not declared.
 	 */
 	public Integer getUndeclaredDependenciesCount() {
-		List<String> dependencies = this.getUndeclaredDependencies();
+		List<Dependency> dependencies = this.getUndeclaredDependencies();
 
 		return dependencies == null ? 0 : dependencies.size();
 	}
 
 	/**
-	 * @return Declared dependencies, but not used, list.
+	 * @return Declared dependencies, but unused, list.
 	 */
-	public List<String> getUnusedDependencies() {
-		return this.dependencyProblems.get(DependencyProblemType.UNUSED);
+	public List<Dependency> getUnusedDependencies() {
+		return this.dependencyProblems == null ? null : this.dependencyProblems.get(DependencyProblemType.UNUSED);
 	}
 
 	/**
 	 * @return The number for declared dependencies but not used.
 	 */
 	public Integer getUnusedDependenciesCount() {
-		List<String> dependencies = this.getUnusedDependencies();
+		List<Dependency> dependencies = this.getUnusedDependencies();
 
 		return dependencies == null ? 0 : dependencies.size();
 	}
@@ -80,7 +78,7 @@ public class ModuleResult implements Serializable {
 	/**
 	 * @param dependencyProblems the dependencyProblems to set.
 	 */
-	public void setDependencyProblems(Map<DependencyProblemType, List<String>> dependencyProblems) {
+	public void setDependencyProblems(Map<DependencyProblemType, List<Dependency>> dependencyProblems) {
 		this.dependencyProblems = dependencyProblems;
 	}
 

@@ -1,13 +1,10 @@
-/**
- * 
- */
 package hudson.plugins.dependencyanalyzer;
 
 import hudson.Launcher;
 import hudson.maven.MavenModuleSetBuild;
-import hudson.model.AbstractBuild;
 import hudson.model.BuildListener;
 import hudson.model.Result;
+import hudson.model.AbstractBuild;
 import hudson.plugins.dependencyanalyzer.persistence.BuildResultSerializer;
 import hudson.plugins.dependencyanalyzer.result.BuildResult;
 import hudson.tasks.BuildStepMonitor;
@@ -19,24 +16,31 @@ import java.util.logging.Logger;
 import org.kohsuke.stapler.DataBoundConstructor;
 
 /**
+ * Recorder to read the module log file and store dependency aalyze result.
+ *
  * @author Vincent Sellier
- * 
+ *
  */
 public class DependencyAnalyzerPublisher extends Recorder {
-	public static final Logger LOGGER = Logger
-			.getLogger(DependencyAnalyzerPublisher.class.getName());
 
+	private static final Logger LOGGER = Logger.getLogger(DependencyAnalyzerPublisher.class.getName());
+
+	/**
+	 * Default constructor.
+	 */
 	@DataBoundConstructor
 	public DependencyAnalyzerPublisher() {
 	}
 
+	/** {@inheritDoc} */
 	public BuildStepMonitor getRequiredMonitorService() {
 		return BuildStepMonitor.STEP;
 	}
 
+	/** {@inheritDoc} */
 	@Override
-	public boolean perform(AbstractBuild build, Launcher launcher,
-			BuildListener listener) throws InterruptedException, IOException {
+	public boolean perform(AbstractBuild build, Launcher launcher, BuildListener listener) throws InterruptedException,
+	IOException {
 
 		Result result = build.getResult();
 		if (!(Result.SUCCESS.equals(result) || Result.UNSTABLE.equals(result))) {
@@ -45,14 +49,12 @@ public class DependencyAnalyzerPublisher extends Recorder {
 		}
 
 		// Construct the build result
-		BuildResult analysis = DependencyAnalyzerResultBuilder
-				.buildResult((MavenModuleSetBuild) build);
+		BuildResult analysis = DependencyAnalyzerResultBuilder.getInstance().buildResult((MavenModuleSetBuild) build);
 
 		// persist this analysis for this build
-		BuildResultSerializer.serialize(build.getRootDir(), analysis);
+		BuildResultSerializer.getInstance().serialize(build.getRootDir(), analysis);
 
-		build.getActions().add(
-				new DependencyAnalyzerPublisherAction(build, analysis));
+		build.getActions().add(new DependencyAnalyzerPublisherAction(build, analysis));
 
 		return true;
 	}

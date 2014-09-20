@@ -24,8 +24,7 @@ public class BuildLogFileParserTest extends AbstractParserTestUtils {
 
 		parser.parseLogFile(file);
 
-		Assert.assertNull("No dependency:analyze block must be found", parser
-				.getDependencyAnalyseBlock());
+		Assert.assertNull("No dependency:analyze block must be found", parser.getDependencyAnalyseBlock());
 
 	}
 
@@ -35,19 +34,28 @@ public class BuildLogFileParserTest extends AbstractParserTestUtils {
 
 		parser.parseLogFile(file);
 
-		Assert.assertNotNull("No dependency:analyze block found", parser
-				.getDependencyAnalyseBlock());
+		Assert.assertNotNull("No dependency:analyze block found", parser.getDependencyAnalyseBlock());
+
+		file = getFile("log_build_with_empty_dependency_analyze_color");
+
+		parser.parseLogFile(file);
+
+		Assert.assertNotNull("No dependency:analyze block found", parser.getDependencyAnalyseBlock());
 	}
 
 	@Test
-	public void testGetDependencyAnalyseSectionEmptyWithExecutionId()
-			throws Exception {
+	public void testGetDependencyAnalyseSectionEmptyWithExecutionId() throws Exception {
 		File file = getFile("log_build_with_empty_dependency_analyze_with_execution_id");
 
 		parser.parseLogFile(file);
 
-		Assert.assertNotNull("No dependency:analyze block found", parser
-				.getDependencyAnalyseBlock());
+		Assert.assertNotNull("No dependency:analyze block found", parser.getDependencyAnalyseBlock());
+
+		file = getFile("log_build_with_empty_dependency_analyze_with_execution_id_color");
+
+		parser.parseLogFile(file);
+
+		Assert.assertNotNull("No dependency:analyze block found", parser.getDependencyAnalyseBlock());
 	}
 
 	@Test
@@ -63,6 +71,16 @@ public class BuildLogFileParserTest extends AbstractParserTestUtils {
 		List<String> lines = IOUtils.readLines(new StringReader(result));
 		Assert.assertEquals("Wrong number of line returned, ", 6, lines.size());
 
+		file = getFile("log_build_with_dependency_analyze_color");
+
+		parser.parseLogFile(file);
+
+		result = parser.getDependencyAnalyseBlock();
+
+		Assert.assertNotNull("dependency:analyze block must be found", result);
+
+		lines = IOUtils.readLines(new StringReader(result));
+		Assert.assertEquals("Wrong number of line returned, ", 6, lines.size());
 	}
 
 	@Test
@@ -73,19 +91,26 @@ public class BuildLogFileParserTest extends AbstractParserTestUtils {
 
 		String result = parser.getDependencyAnalyseBlock();
 
-		Assert.assertNotNull("dependency:analyze-only block must be found",
-				result);
+		Assert.assertNotNull("dependency:analyze-only block must be found", result);
 
 		List<String> lines = IOUtils.readLines(new StringReader(result));
-		Assert
-				.assertEquals("Wrong number of line returned, ", 10, lines
-						.size());
+		Assert.assertEquals("Wrong number of line returned, ", 10, lines.size());
+
+		file = getFile("log_build_with_dependency_analyze_only_color");
+
+		parser.parseLogFile(file);
+
+		result = parser.getDependencyAnalyseBlock();
+
+		Assert.assertNotNull("dependency:analyze-only block must be found", result);
+
+		lines = IOUtils.readLines(new StringReader(result));
+		Assert.assertEquals("Wrong number of line returned, ", 10, lines.size());
 
 	}
 
 	@Test
-	public void testGetDependencyAnalyseSectionPresentWithExecutionId()
-			throws Exception {
+	public void testGetDependencyAnalyseSectionPresentWithExecutionId() throws Exception {
 		File file = getFile("log_build_with_dependency_analyze_with_execution_id");
 
 		parser.parseLogFile(file);
@@ -93,9 +118,20 @@ public class BuildLogFileParserTest extends AbstractParserTestUtils {
 		String result = parser.getDependencyAnalyseBlock();
 
 		Assert.assertNotNull("dependency:analyze block must be found", result);
-		System.err.println(result);
+
 		List<String> lines = IOUtils.readLines(new StringReader(result));
 		Assert.assertEquals("Wrong number of line returned, ", 3, lines.size());
 
+		file = getFile("log_build_with_dependency_analyze_with_execution_id_color");
+
+		parser.parseLogFile(file);
+
+		result = parser.getDependencyAnalyseBlock();
+
+		Assert.assertNotNull("dependency:analyze block must be found", result);
+		lines = IOUtils.readLines(new StringReader(result));
+		Assert.assertEquals("Wrong number of line returned, ", 3, lines.size());
+
 	}
+
 }

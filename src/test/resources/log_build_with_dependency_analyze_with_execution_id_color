@@ -1,0 +1,28 @@
+[INFO] Scanning for projects...
+[INFO] Searching repository for plugin with prefix: 'dependency'.
+[INFO] ------------------------------------------------------------------------
+[INFO] Building jmemcached Command Line Interface
+[INFO]    task-segment: [dependency:analyze]
+[INFO] ------------------------------------------------------------------------
+[INFO] Preparing dependency:analyze
+[INFO] [resources:resources {execution: default-resources}]
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 5 resources
+[INFO] [compiler:compile {execution: default-compile}]
+[INFO] Nothing to compile - all classes are up to date
+[INFO] [resources:testResources {execution: default-testResources}]
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /Software/hudson/jobs/jmemcache-daemon/workspace/cli/src/test/resources
+[INFO] [compiler:testCompile {execution: default-testCompile}]
+[INFO] No sources to compile
+[8mha:AAAAXx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P0+vJLE4u1gvPjexLDVPzxdE+uZn5fvll6T+rlY5WiYVksXEwFBRxCAFVZ+cn1ecn5Oq5wyhQQoZIIARpLAAAFkNeyJfAAAA[0m[INFO] [dependency:analyze {execution: default-cli}]
+[8mha:AAAAYx+LCAAAAAAAAP9b85aBtbiIQSWjNKU4P0+vJLE4u1gvPjexLDVPzxdEhicW5WXmpfvll6S2fNly5fzGzauYGBgqihikoFqS8/OK83NS9ZwhNEghAwQwghQWAACwxA+XYgAAAA==[0m[WARNING] Unused declared dependencies found:
+[8mha:AAAAYx+LCAAAAAAAAP9b85aBtbiIQSWjNKU4P0+vJLE4u1gvPjexLDVPzxdEhicW5WXmpfvll6S2fNly5fzGzauYGBgqihikoFqS8/OK83NS9ZwhNEghAwQwghQWAACwxA+XYgAAAA==[0m[WARNING]    org.slf4j:slf4j-jdk14:jar:1.5.5:compile
+[8mha:AAAAYx+LCAAAAAAAAP9b85aBtbiIQSWjNKU4P0+vJLE4u1gvPjexLDVPzxdEhicW5WXmpfvll6S2fNly5fzGzauYGBgqihikoFqS8/OK83NS9ZwhNEghAwQwghQWAACwxA+XYgAAAA==[0m[WARNING]    junit:junit:jar:4.5:test
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESSFUL
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 5 seconds
+[INFO] Finished at: Sat Aug 22 00:16:09 CEST 2009
+[INFO] Final Memory: 24M/80M
+[INFO] ------------------------------------------------------------------------

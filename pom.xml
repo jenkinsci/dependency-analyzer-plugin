@@ -13,40 +13,61 @@
 	<version>0.7-SNAPSHOT</version>
 	<url>http://wiki.jenkins-ci.org/display/JENKINS/Dependency+Analyzer+Plugin</url>
 	<developers>
-	   <developer>
-	      <id>vsellier</id>
-	      <name>Vincent Sellier</name>
-	   </developer>
+		<developer>
+			<id>vsellier</id>
+			<name>Vincent Sellier</name>
+		</developer>
+		<developer>
+			<id>ejouvin</id>
+			<name>Etienne Jouvin</name>
+		</developer>
 	</developers>
 
 	<dependencies>
-	   <dependency>
-	   	   <groupId>org.jvnet.hudson.main</groupId>
-		   <artifactId>maven-plugin</artifactId>
-		   <version>${project.parent.version}</version>
-	   </dependency>
+		<dependency>
+				<groupId>org.jvnet.hudson.main</groupId>
+			<artifactId>maven-plugin</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
 	</dependencies>
 
-	<!-- artifactId doesn't match plugin directory -->
 	<scm>
-	  <connection>scm:svn:https://svn.jenkins-ci.org/trunk/hudson/plugins/dependency-analyzer</connection>
-	  <developerConnection>scm:svn:https://svn.jenkins-ci.org/trunk/hudson/plugins/dependency-analyzer</developerConnection>
-	  <url>https://svn.jenkins-ci.org/trunk/hudson/plugins/dependency-analyzer</url>
+		<connection>scm:git:git@github.com:jenkinsci/dependency-analyzer.git</connection>
+		<developerConnection>scm:git:git@github.com:jenkinsci/dependency-analyzer.git</developerConnection>
+		<tag>HEAD</tag>
+		<url>https://github.com/jenkinsci/dependency-analyzer-plugin.git</url>
 	</scm>
 
-    <repositories>
-        <repository>
-            <id>repo.jenkins-ci.org</id>
-            <url>http://repo.jenkins-ci.org/public/</url>
-        </repository>
-    </repositories>
+	<repositories>
+		<repository>
+			<id>repo.jenkins-ci.org</id>
+			<url>http://repo.jenkins-ci.org/public/</url>
+		</repository>
+	</repositories>
 
-    <pluginRepositories>
-        <pluginRepository>
-            <id>repo.jenkins-ci.org</id>
-            <url>http://repo.jenkins-ci.org/public/</url>
-        </pluginRepository>
-    </pluginRepositories>
-</project>  
-  
+	<pluginRepositories>
+		<pluginRepository>
+			<id>repo.jenkins-ci.org</id>
+			<url>http://repo.jenkins-ci.org/public/</url>
+		</pluginRepository>
+	</pluginRepositories>
 
+	<distributionManagement>
+		<repository>
+			<id>maven.jenkins-ci.org</id>
+			<url>http://maven.jenkins-ci.org:8081/content/repositories/releases/</url>
+		</repository>
+	</distributionManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-release-plugin</artifactId>
+				<configuration>
+					<goals>deploy</goals>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
