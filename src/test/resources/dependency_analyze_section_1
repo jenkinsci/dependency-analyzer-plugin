@@ -1,6 +1,0 @@
-[WARNING] Used undeclared dependencies found:
-[WARNING]    org.apache.maven:maven-model:jar:2.0.2:compile
-[WARNING]    org.codehaus.plexus:plexus-utils:jar:1.1:compile
-[WARNING] Unused declared dependencies found:
-[WARNING]    org.apache.maven:maven-artifact-manager:jar:2.0:compile
-[WARNING]    org.apache.maven:maven-artifact:jar:2.0:compile
