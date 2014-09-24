@@ -10,7 +10,7 @@
 	<artifactId>dependencyanalyzer</artifactId>
 	<name>Jenkins Dependency Analyzer Plugin</name>
 	<packaging>hpi</packaging>
-	<version>0.7</version>
+	<version>0.7-SNAPSHOT</version>
 	<url>http://wiki.jenkins-ci.org/display/JENKINS/Dependency+Analyzer+Plugin</url>
 	<developers>
 		<developer>
@@ -25,7 +25,7 @@
 
 	<dependencies>
 		<dependency>
-				<groupId>org.jvnet.hudson.main</groupId>
+			<groupId>org.jvnet.hudson.main</groupId>
 			<artifactId>maven-plugin</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
