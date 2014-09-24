@@ -10,7 +10,7 @@
 	<artifactId>dependencyanalyzer</artifactId>
 	<name>Jenkins Dependency Analyzer Plugin</name>
 	<packaging>hpi</packaging>
-	<version>0.7-SNAPSHOT</version>
+	<version>0.7</version>
 	<url>http://wiki.jenkins-ci.org/display/JENKINS/Dependency+Analyzer+Plugin</url>
 	<developers>
 		<developer>
