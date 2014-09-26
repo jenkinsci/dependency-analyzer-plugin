@@ -1,17 +1,29 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
 	<parent>
-		<groupId>org.jvnet.hudson.plugins</groupId>
+		<groupId>org.jenkins-ci.plugins</groupId>
 		<artifactId>plugin</artifactId>
-		<version>1.377</version>
-		<relativePath>..</relativePath>
+		<version>1.424</version>
 	</parent>
-	<groupId>org.jvnet.hudson.plugins</groupId>
+
 	<artifactId>dependencyanalyzer</artifactId>
-	<name>Jenkins Dependency Analyzer Plugin</name>
 	<packaging>hpi</packaging>
-	<version>0.7</version>
+	<version>0.7-SNAPSHOT</version>
+	<name>Jenkins Dependency Analyzer Plugin</name>
 	<url>http://wiki.jenkins-ci.org/display/JENKINS/Dependency+Analyzer+Plugin</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+  
+	<scm>
+		<connection>scm:git:git://github.com/jenkinsci/dependency-analyzer.git</connection>
+		<developerConnection>scm:git:git@github.com:jenkinsci/dependency-analyzer.git</developerConnection>
+		<url>https://github.com/jenkinsci/dependency-analyzer-plugin.git</url>
+		<tag>HEAD</tag>
+	</scm>
+
 	<developers>
 		<developer>
 			<id>vsellier</id>
@@ -25,18 +37,22 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.jvnet.hudson.main</groupId>
+			<groupId>org.jenkins-ci.main</groupId>
 			<artifactId>maven-plugin</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
 	</dependencies>
 
-	<scm>
-		<connection>scm:git:git@github.com:jenkinsci/dependency-analyzer.git</connection>
-		<developerConnection>scm:git:git@github.com:jenkinsci/dependency-analyzer.git</developerConnection>
-		<tag>HEAD</tag>
-		<url>https://github.com/jenkinsci/dependency-analyzer-plugin.git</url>
-	</scm>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-release-plugin</artifactId>
+				<configuration>
+					<goals>deploy</goals>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
 	<repositories>
 		<repository>
@@ -52,22 +68,13 @@
 		</pluginRepository>
 	</pluginRepositories>
 
+<!--
 	<distributionManagement>
 		<repository>
 			<id>maven.jenkins-ci.org</id>
 			<url>http://maven.jenkins-ci.org:8081/content/repositories/releases/</url>
 		</repository>
 	</distributionManagement>
-
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-release-plugin</artifactId>
-				<configuration>
-					<goals>deploy</goals>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+-->
 
 </project>
