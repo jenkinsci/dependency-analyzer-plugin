@@ -18,8 +18,8 @@
 	</properties>
   
 	<scm>
-		<connection>scm:git:git://github.com/jenkinsci/dependency-analyzer.git</connection>
-		<developerConnection>scm:git:git@github.com:jenkinsci/dependency-analyzer.git</developerConnection>
+		<connection>scm:git:git://github.com/jenkinsci/dependency-analyzer-plugin.git</connection>
+		<developerConnection>scm:git:git@github.com:jenkinsci/dependency-analyzer-plugin.git</developerConnection>
 		<url>https://github.com/jenkinsci/dependency-analyzer-plugin.git</url>
 		<tag>HEAD</tag>
 	</scm>
