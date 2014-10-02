@@ -9,7 +9,7 @@
 
 	<artifactId>dependencyanalyzer</artifactId>
 	<packaging>hpi</packaging>
-	<version>0.7</version>
+	<version>0.7-SNAPSHOT</version>
 	<name>Jenkins Dependency Analyzer Plugin</name>
 	<url>http://wiki.jenkins-ci.org/display/JENKINS/Dependency+Analyzer+Plugin</url>
 
@@ -21,7 +21,7 @@
 		<connection>scm:git:git://github.com/jenkinsci/dependency-analyzer-plugin.git</connection>
 		<developerConnection>scm:git:git@github.com:jenkinsci/dependency-analyzer-plugin.git</developerConnection>
 		<url>https://github.com/jenkinsci/dependency-analyzer-plugin.git</url>
-		<tag>dependencyanalyzer-0.7</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 	<developers>
