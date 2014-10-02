@@ -4,22 +4,22 @@
 
     <l:layout xmlns:plugin="/hudson/plugins/javancss/tags" css="/plugin/javancss/css/style.css" norefresh="true">
         <st:include it="${it.build}" page="sidepanel.jelly"/>
-              
+
       <l:main-panel>
 		<h1>${%Dependency Analysis Report}</h1>
 
 		<j:forEach var="module" items="${it.buildResult.modules}">
 			<j:if test="${module.unusedDependenciesCount > 0 or module.undeclaredDependenciesCount > 0}">
 					<h2>
-						${module.displayName} (${module.moduleName}) 
+						${module.displayName} (${module.moduleName})
 					</h2>
-					
+
 					<j:if test="${module.unusedDependenciesCount > 0}">
-						<table class="pane">	
+						<table class="pane">
 							<tr>
 								<td class="pane-header" colspan="5">${%Unused dependencies}</td>
 							</tr>
-						
+
 							<tr>
 								<th class="pane" width="20%">${%Dependency GroupId}</th>
 								<th class="pane" width="20%">${%Dependency Artifact}</th>
@@ -36,7 +36,7 @@
 									<td class="pane" width="20%">${dependency.scope}</td>
 								</tr>
 							</j:forEach>
-						</table> 
+						</table>
 					</j:if>
 
 					<j:if test="${module.undeclaredDependenciesCount > 0}">
@@ -44,7 +44,7 @@
 							<tr>
 								<td class="pane-header" colspan="5">${%Undeclared used dependencies}</td>
 							</tr>
-						
+
 							<tr>
 								<th class="pane" width="20%">${%Dependency GroupId}</th>
 								<th class="pane" width="20%">${%Dependency Artifact}</th>
@@ -61,12 +61,12 @@
 									<td class="pane" width="20%">${dependency.scope}</td>
 								</tr>
 							</j:forEach>
-						</table> 
+						</table>
 					</j:if>
 			</j:if>
 		</j:forEach>
 
 	  </l:main-panel>
-      
+
 	  </l:layout>
 </j:jelly>
